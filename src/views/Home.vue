@@ -37,14 +37,17 @@ export default {
   methods: {
     createGame() {
       if (this.playerName !== "" && this.playerName.length > 2) {
-        let promise = StorageService.setRef('user').create({name: this.playerName});
-        promise.then((data) => {
-          this.$store.commit('userChange', {id: data.id, name: this.playerName});
-          let localId = randomId();
-          StorageService.setRef('lobby').create({name: 'game_' + localId, playerId: this.$store.state.user.id})
-          this.$store.commit('lobbyChange', {name: 'game_' + localId})
-          this.$router.push('/game');
-        }, (reason) => console.log(reason));
+        StorageService.setRef('user').create({name: this.playerName})
+            .then((data) => {
+              this.$store.commit('userChange', {id: data.id, name: this.playerName});
+              let localId = randomId();
+              StorageService.setRef('lobby').create({name: 'game_' + localId, playerId: this.$store.state.user.id})
+                  .then((data) => {
+                    this.$store.commit('lobbyChange', {id: data.id, name: 'game_' + localId});
+                    this.$store.commit('hostChange', true);
+                  });
+              this.$router.push('/game');
+            }, (reason) => console.log(reason));
       }
     },
     searchGame() {

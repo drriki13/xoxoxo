@@ -15,6 +15,10 @@ class StorageService {
         return storage.collection(this.ref);
     }
 
+    findById(key) {
+        return storage.collection(this.ref).doc(key);
+    }
+
     create(data) {
         return storage.collection(this.ref).add(data);
     }

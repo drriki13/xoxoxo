@@ -29,6 +29,7 @@ export default {
   methods: {
     connectLobby(id) {
       StorageService.setRef('lobby').update(id, {enemyId: this.$store.state.user.id});
+      this.$store.commit('lobbyChange', {id: id});
       this.$router.push('/game');
     }
   },

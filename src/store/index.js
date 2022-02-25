@@ -9,11 +9,8 @@ export default new Vuex.Store({
             id: "",
             name: ""
         },
-        lobby: {
-            id: "",
-            name: ""
-        },
-        host: false
+        lobby: {},
+        host: false,
     },
     getters: {},
     mutations: {
@@ -22,7 +19,12 @@ export default new Vuex.Store({
         },
         lobbyChange(state, payload) {
             state.lobby = payload;
+        },
+        hostChange(state, payload) {
+            state.host = payload;
         }
     },
-    actions: {},
+    actions: {
+
+    },
 });
