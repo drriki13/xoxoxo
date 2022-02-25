@@ -1,4 +1,7 @@
+import Vue from "vue";
 import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
 
 export default new VueRouter({
     mode: 'history',
@@ -12,6 +15,11 @@ export default new VueRouter({
             path: '/game',
             name: 'Game',
             component: () => import('../views/Game')
+        },
+        {
+            path: '/lobby',
+            name: 'Lobby game',
+            component: () => import('../views/Lobby')
         }
     ]
 })
